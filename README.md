@@ -2,13 +2,13 @@
 Custom wikitext parser to produce html, plain text fields and relevant links from wikipedia page source code.
 
 ## Get started
-To install the `wikitext-asymptote` package, simply run 
+To install the `wikitext_asymptote` package, simply run 
 
-    pip install wikitext-asymptote
+    pip install wikitext_asymptote
 
 You can then use the package as follows:
 
-    import wikitext-asymptote as wa
+    import wikitext_asymptote as wa
 
     # Raw wikitext goes here
     page = """..."""
