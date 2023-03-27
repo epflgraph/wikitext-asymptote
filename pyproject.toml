@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wikitext_asymptote"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Aitor Pérez", email="aitor.perez@epfl.ch" },
   { name="Ramtin Yazdanian", email="ramtin.yazdanian@epfl.ch" }
