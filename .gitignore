@@ -1,0 +1,12 @@
+# MacOS metadata
+**/.DS_Store
+
+# PyCharm project files
+.idea
+
+# Pycache
+__pycache__
+
+# Python virtual environment
+venv
+
