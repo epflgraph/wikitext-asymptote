@@ -69,6 +69,35 @@ def clean(text):
 
     return text
 
+
+def preprocess_text(text):
+    # PROBLEM:
+    #   Headings like ===''The Times They Are A-Changin''' sessions, part 1=== are not correctly parsed
+    # WORKAROUND:
+    #   1. Check if there are headings with an odd number of single quotes (').
+    #   2. If so, replace all occurrences of ''[...]in''' with HTML tags <i>[...]in'</i>.
+    #      For instance, ''The Times They Are A-Changin''' becomes <i>The Times They Are A-Changin'</i>.
+
+    # Check for lines that start and end with the same number of = characters and contain at least one single quote (')
+    matches = re.findall(r"^(=+)(.*'.*)\1$", text, re.MULTILINE)
+
+    # For all matches, check if they contain an odd number of single quotes (')
+    ok = True
+    for _, match in matches:
+        if match.count("'") % 2 != 0:
+            ok = False
+            break
+
+    # If all headings are ok (contain an even number of single quotes (')), return the text unchanged
+    if ok:
+        return text
+
+    # Replace all occurrences of ''[...]in''' with HTML tags <i>[...]in'</i>
+    text = re.sub(r"''(.*in')''", r"<i>\1</i>", text)
+
+    return text
+
+
 ############################################################
 
 
@@ -764,6 +793,9 @@ def get_link_title(link):
 
 
 def parse_page(page_content):
+    # Preprocess page content
+    page_content = preprocess_text(page_content)
+
     # Produce wikicode object from page content
     wikicode = mwparserfromhell.parse(page_content)
 
